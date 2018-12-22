@@ -7,7 +7,7 @@ setInterval(() => {
     })
   $(`.images>img:nth-child(${setN(n + 1)})`).removeClass('enter leave').addClass('current')
   n += 1
-}, 1500)
+}, 3000)
 
 function setN(n) {
   if (n > 3) {
