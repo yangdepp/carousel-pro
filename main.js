@@ -1,13 +1,27 @@
 initCarouselItem();
 
-setInterval(() => {
+function doCarousel() {
   $(`.images>img:nth-child(${setN(n)})`).removeClass('current enter').addClass('leave')
     .one('transitionend', (e) => {
       $(e.currentTarget).removeClass('leave current').addClass('enter');
     })
   $(`.images>img:nth-child(${setN(n + 1)})`).removeClass('enter leave').addClass('current')
   n += 1
+}
+
+let timer = setInterval(() => {
+  doCarousel();
 }, 3000)
+
+document.addEventListener('visibilitychange', function (e) {
+  if (document.hidden) {
+    window.clearInterval(timer)
+  } else {
+    timer = setInterval(() => {
+      doCarousel();
+    }, 3000)
+  }
+})
 
 function setN(n) {
   if (n > 3) {
